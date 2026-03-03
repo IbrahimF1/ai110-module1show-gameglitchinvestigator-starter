@@ -34,10 +34,11 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        # ✅ FIX: Swapped the Go LOWER and Go HIGHER hints
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!" # ❌ Original: "📈 Go HIGHER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!" # ❌ Original: "📉 Go LOWER!"
     except TypeError:
         g = str(guess)
         if g == secret:
@@ -118,14 +119,26 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
-raw_guess = st.text_input(
-    "Enter your guess:",
-    key=f"guess_input_{difficulty}"
-)
+# raw_guess = st.text_input(
+#     "Enter your guess:",
+#     key=f"guess_input_{difficulty}"
+# )
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    submit = st.button("Submit Guess 🚀")
+# col1, col2, col3 = st.columns(3)
+# with col1:
+#     submit = st.button("Submit Guess 🚀")
+# with col2:
+#     new_game = st.button("New Game 🔁")
+# with col3:
+#     show_hint = st.checkbox("Show hint", value=True)
+
+# ✅ FIX: Form creates atomic submission
+with st.form("guess_form"):
+    raw_guess = st.text_input("Enter your guess:")
+    submit = st.form_submit_button("Submit Guess 🚀")
+
+# New Game and Show hint sit outside of guess submission
+col2, col3 = st.columns(2)
 with col2:
     new_game = st.button("New Game 🔁")
 with col3:
@@ -134,6 +147,7 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
+    st.session_state.status = "playing" # ✅ FIX: Added to reset state after winning.
     st.success("New game started.")
     st.rerun()
 

@@ -25,13 +25,26 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] Describe the game's purpose.
+
+The game allows a user to guess a number from 1 to a 100 within 8 guesses.
+
+- [x] Detail which bugs you found.
+
+Bugs:
+1) Hints for the user were flipped in the app.
+2) The state didn't reset when a user won and wanted to start over.
+3) Race condition between input state updates and button clicks where if a user enters a new guess that is different from their previous guess then it won't register until the second time.
+
+- [x] Explain what fixes you applied.
+
+1) I added the `session_state.status = "playing"` line in logic_utils.py after clicking New Game.
+2) I changed the hints from "Higher/Lower" to "Lower/Higher".
+3) I changed the input field and submit guess button so that it is within a form for atomic operations.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- [x] [Insert a screenshot of your fixed, winning game here]
 
 ## 🚀 Stretch Features
 
