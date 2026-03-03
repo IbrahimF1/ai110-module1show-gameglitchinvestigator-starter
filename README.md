@@ -46,6 +46,12 @@ Bugs:
 
 - [x] [Insert a screenshot of your fixed, winning game here]
 
+
+
+https://github.com/user-attachments/assets/8a2b2e9b-02ee-4341-83aa-e0381238e379
+
+
+
 ## 🚀 Stretch Features
 
 - [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
